@@ -25,7 +25,10 @@
         <Grid x:Name="Grid" Grid.Row="1">
             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Ellipse x:Name="Ball" Canvas.Left="300" Canvas.Top="300" Width="40" Height="40" Fill="Red" Canvas.ZIndex="10"/>
-                <Ellipse x:Name="Hole" Height="80" Width="80" Fill="Black" StrokeThickness="6" Stroke="White" Canvas.Left="156" Canvas.Top="72"/>
+                <Ellipse x:Name="HoleRed" Height="80" Width="80" Fill="Red" StrokeThickness="6" Stroke="White" Canvas.Left="49" Canvas.Top="38"/>
+                <Ellipse x:Name="HoleRed2" Height="80" Width="80" Fill="Red" StrokeThickness="6" Stroke="White" Canvas.Left="379" Canvas.Top="38"/>
+                <Ellipse x:Name="HoleRed3" Height="80" Width="80" Fill="Red" StrokeThickness="6" Stroke="White" Canvas.Left="49" Canvas.Top="611"/>
+                <Ellipse x:Name="HoleGreen" Height="80" Width="80" Fill="Green" StrokeThickness="6" Stroke="White" Canvas.Left="379" Canvas.Top="611"/>
             </Canvas>
         </Grid>
         <StackPanel x:Name="Message" Grid.Row="1" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
