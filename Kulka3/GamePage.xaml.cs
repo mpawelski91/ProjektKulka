@@ -72,14 +72,19 @@ namespace Kulka3
         private void SetHolePosition(Ellipse name, string n)
         {
             int posX, posY;
-
+            bool result = true;
 
             do
             {
-                posX = rand.Next(0, (int)Grid.ActualWidth - 60);
-                posY = rand.Next(0, (int)Grid.ActualHeight - 60);
-            }
-            while (posY == Canvas.GetLeft(Ball) || posX == Canvas.GetTop(Ball));
+                do
+                {
+                    posX = rand.Next(0, (int)Grid.ActualWidth - 60);
+                    posY = rand.Next(0, (int)Grid.ActualHeight - 60);
+                }
+                while (posY == Canvas.GetLeft(Ball) || posX == Canvas.GetTop(Ball));
+
+                result = CompareWithOthersHoles(posX, posY);
+            } while (!result);
 
             Canvas.SetTop(name, posY);
             Canvas.SetLeft(name, posX);
@@ -112,6 +117,17 @@ namespace Kulka3
                     break;
             }
 
+        }
+
+        private bool CompareWithOthersHoles(int posX, int posY)
+        {
+            if (holes.Any())
+            {
+                foreach(var hole in holes)
+                    if(posY == hole.Y || posX == hole.X)
+                        return false;
+            }
+            return true;
         }
 
         private void Accelerometer_CurrentValueChanged(object sender, SensorReadingEventArgs<AccelerometerReading> e)
