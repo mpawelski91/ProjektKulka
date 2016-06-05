@@ -1,0 +1,41 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Kulka3.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" x:Name="Score" Text="Wynik: 0"/>
+
+        <Grid x:Name="Grid" Grid.Row="1">
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Ellipse x:Name="Ball" Canvas.Left="300" Canvas.Top="300" Width="40" Height="40" Fill="Red" Canvas.ZIndex="10"/>
+                <Ellipse x:Name="HoleRed" Height="80" Width="80" Fill="Red" StrokeThickness="6" Stroke="White" Canvas.Left="49" Canvas.Top="38"/>
+                <Ellipse x:Name="HoleRed2" Height="80" Width="80" Fill="Red" StrokeThickness="6" Stroke="White" Canvas.Left="379" Canvas.Top="38"/>
+                <Ellipse x:Name="HoleRed3" Height="80" Width="80" Fill="Red" StrokeThickness="6" Stroke="White" Canvas.Left="49" Canvas.Top="611"/>
+                <Ellipse x:Name="HoleGreen" Height="80" Width="80" Fill="Green" StrokeThickness="6" Stroke="White" Canvas.Left="379" Canvas.Top="611"/>
+            </Canvas>
+        </Grid>
+        <StackPanel x:Name="Message" Grid.Row="1" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock x:Name="Text" />
+            <TextBox x:Name="Nick" Width="auto"/>
+            <Button Content="Ok" Click="ScoreConfirmed_Click"/>
+        </StackPanel>
+    </Grid>
+
+</phone:PhoneApplicationPage>

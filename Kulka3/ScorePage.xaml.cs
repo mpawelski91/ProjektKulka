@@ -11,19 +11,21 @@ using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.Device;
 using System.Device.Location;
+using System.Windows.Data;
 
 namespace Kulka3
 {
-    public partial class ScoreWindow : PhoneApplicationPage
+    public partial class Scorepage : PhoneApplicationPage
     {
         //private static List<RecordModel> records = new List<RecordModel>();
 
-        public ScoreWindow()
+        public Scorepage()
         {
             InitializeComponent();
             //records = new List<RecordModel>();
-            //ReadRecords();
+            //Helper.ReadRecords();
             //lista.ItemsSource = Helper.records;
+            lista.ItemsSource = Helper.records;
         }
 
         //IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
@@ -33,9 +35,10 @@ namespace Kulka3
             base.OnNavigatedTo(e);
 
             string msg = "";
-            string location = getLocalization();
+            //string location = getLocalization();
+            string localization = ",";
             if (NavigationContext.QueryString.TryGetValue("msg", out msg))
-                CheckRecord(msg+",ksdhfjkasdf");
+                CheckRecord(msg + localization);
         }
 
         private string getLocalization()
@@ -58,39 +61,35 @@ namespace Kulka3
 
         private void CheckRecord(string message)
         {
-            if (Helper.records.Any())
+            int score;
+            string nick, localization;
+
+            if (!Helper.records.Any() || Helper.records.Count < 10)
+            {
+                Helper.ParseSetting(message, out nick, out score, out localization);
+                Helper.records.Add(new RecordModel { Nick = nick, Score = score, Localization = localization });
+            }
+            else if(Helper.records.Count == 10)
             {
                 var rec = Helper.records.LastOrDefault().Score;
-                string nick, localization;
-                int score;
-                ParseSetting(message, out nick, out score, out localization);
+
+                Helper.ParseSetting(message, out nick, out score, out localization);
 
                 if (rec < score)
                 {
                     Helper.records.RemoveAt(Helper.records.Count - 1);
                     Helper.records.Add(new RecordModel { Nick = nick, Score = score, Localization = localization });
-                    Helper.records = new List<RecordModel>(Helper.records.OrderBy(x => x.Score));
-
-                    
-
-                    //for (int i = 1; i <= 10; i++)
-                    //{
-                    //    if (settings.Contains(i.ToString()))
-                    //        settings[i.ToString()] = nick + "," + score + "," + localization;
-                    //    else
-                    //        settings.Add(i.ToString(), nick + "," + score + "," + localization);
-                    //}
+                   
                 }
+               
             }
-            else
-            {
-                string nick, localization;
-                int score;
-                ParseSetting(message, out nick, out score, out localization);
-                Helper.records.Add(new RecordModel { Nick = nick, Score = score, Localization = localization });
-            }
+            Helper.records = new List<RecordModel>(Helper.records.OrderByDescending(x => x.Score));
+            //SaveRecords();
             lista.ItemsSource = Helper.records;
+            //Helper.SaveRecords();
         }
+
+        
 
         //private void ReadRecords()
         //{
@@ -103,27 +102,30 @@ namespace Kulka3
         //            int score;
         //            var setting = IsolatedStorageSettings.ApplicationSettings[i.ToString()] as string;
         //            ParseSetting(setting, out nick, out score, out localization);
-        //            records.Add(new RecordModel { Nick = nick, Score = score, Localization = localization });
+        //            Helper.records.Add(new RecordModel { Nick = nick, Score = score, Localization = localization });
         //        }
         //    }
 
-        //    var temp = new List<RecordModel>(records);
-        //    records = new List<RecordModel>(temp.OrderBy(x => x.Score));
+        //    var temp = new List<RecordModel>(Helper.records);
+        //    Helper.records = new List<RecordModel>(temp.OrderByDescending(x => x.Score));
         //}
 
-        private void ParseSetting(string setting, out string nick, out int score, out string localization)
+        //private void ParseSetting(string setting, out string nick, out int score, out string localization)
+        //{
+        //    string[] tab = setting.Split(',');
+        //    nick = tab[0];
+        //    int.TryParse(tab[1], out score);
+        //    localization = tab[2];
+        //}
+
+        private void Restart_Click(object sender, RoutedEventArgs e)
         {
-            string[] tab = setting.Split(',');
-            nick = tab[0];
-            int.TryParse(tab[1], out score);
-            localization = tab[2];
+            NavigationService.Navigate(new Uri("/GamePage.xaml", UriKind.Relative));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BackToMenu_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
-
-
     }
 }
