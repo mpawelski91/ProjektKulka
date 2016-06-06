@@ -36,10 +36,18 @@ namespace Kulka3
         {
             NavigationService.Navigate(new Uri("/ScorePage.xaml", UriKind.Relative));
         }
+        private void SettingsPage_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Terminate();
         }
+
+   
+
+
     }
 }

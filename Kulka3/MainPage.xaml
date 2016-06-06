@@ -39,7 +39,7 @@
             <Button Content="Najlepsze wyniki" Grid.Row="1" VerticalAlignment="Center"
                     HorizontalAlignment="Center" Click="ScorePage_Click"/>
             <Button Content="Ustawienia" Grid.Row="2" VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center" Click="SettingsPage_Click"/>
             <Button Content="Wyjście" Grid.Row="3" VerticalAlignment="Center"
                     HorizontalAlignment="Center" Click="Exit_Click"/>
         </Grid>
