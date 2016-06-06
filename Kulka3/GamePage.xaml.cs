@@ -37,7 +37,7 @@ namespace Kulka3
             accelerometer = new Accelerometer();
             accelerometer.TimeBetweenUpdates = TimeSpan.FromMilliseconds(3);
             accelerometer.CurrentValueChanged += Accelerometer_CurrentValueChanged;
-            accelerometer.Start();
+           // accelerometer.Start();
             HolePositionRed = new Vector2 { X = 49, Y = 38 };
             HolePositionRed2 = new Vector2 { X = 379, Y = 38 };
             HolePositionRed3 = new Vector2 { X = 49, Y = 611 };
@@ -50,6 +50,10 @@ namespace Kulka3
             score = 0;
 
             //StartTimers();
+        }
+        private void Storyboard_Completed(object sender, EventArgs e)
+        {
+           accelerometer.Start();
         }
 
         private void StartTimers()
