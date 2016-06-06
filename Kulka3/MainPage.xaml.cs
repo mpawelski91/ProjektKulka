@@ -16,22 +16,31 @@ using Microsoft.Xna.Framework.Control;
 using System.ComponentModel;
 using Microsoft.Xna.Framework;
 using System.Windows.Shapes;
+using System.Threading.Tasks;
 
 namespace Kulka3
 {
     public partial class MainPage : PhoneApplicationPage
     {
-
+        int animation = 0;
         public MainPage()
         {
             InitializeComponent();
         }
 
+        
         private void OpenGame_Click(object sender, RoutedEventArgs e)
         {
+            if (animation == 1)
+            {
+                NavigationService.Navigate(new Uri("/GamePage.xaml", UriKind.Relative));
+            }
+       }
+        private void Storyboard_Completed(object sender, EventArgs e)
+        {
+            animation++;
             NavigationService.Navigate(new Uri("/GamePage.xaml", UriKind.Relative));
         }
-
         private void ScorePage_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/ScorePage.xaml", UriKind.Relative));

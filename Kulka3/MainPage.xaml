@@ -1,11 +1,12 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="Kulka3.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions" xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    x:Class="Kulka3.MainPage"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -14,34 +15,59 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="3*"/>
-        </Grid.RowDefinitions>
+	<Grid>
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="VisualStateGroup">
+				<VisualStateGroup.Transitions>
+					<VisualTransition GeneratedDuration="0" To="onTap">
+                        <Storyboard x:Name="StoryboardTest" Completed="Storyboard_Completed">
+							<DoubleAnimation Duration="0:0:1" To="-360" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="button" d:IsOptimized="True"/>
+						</Storyboard>
+					</VisualTransition>
+				</VisualStateGroup.Transitions>
+				<VisualState x:Name="onTap"/>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="3*"/>
+		</Grid.RowDefinitions>
 
-        <!--Napis-->
-        <TextBlock Grid.Row="0" Text="Kulka" VerticalAlignment="Bottom"
-                   HorizontalAlignment="Center" FontSize="30"/>
+		<VisualStateManager.CustomVisualStateManager>
+			<ec:ExtendedVisualStateManager/>
+		</VisualStateManager.CustomVisualStateManager>
 
-        <!--Przyciski-->
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+		<!--Napis-->
+		<TextBlock Grid.Row="0" Text="Kulka" VerticalAlignment="Bottom"
+			HorizontalAlignment="Center" FontSize="30" Margin="0,0,0,30"/>
 
-            <Button Content="Nowa gra" Grid.Row="0" VerticalAlignment="Center"
-                    HorizontalAlignment="Center" Click="OpenGame_Click"/>
-            <Button Content="Najlepsze wyniki" Grid.Row="1" VerticalAlignment="Center"
-                    HorizontalAlignment="Center" Click="ScorePage_Click"/>
-            <Button Content="Ustawienia" Grid.Row="2" VerticalAlignment="Center"
-                    HorizontalAlignment="Center" Click="SettingsPage_Click"/>
-            <Button Content="Wyjście" Grid.Row="3" VerticalAlignment="Center"
-                    HorizontalAlignment="Center" Click="Exit_Click"/>
-        </Grid>
-    </Grid>
+		<!--Przyciski-->
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<Button x:Name="button" Content="Nowa gra" Grid.Row="0" VerticalAlignment="Center"
+				HorizontalAlignment="Center" Click="OpenGame_Click" RenderTransformOrigin="0.5,0.5">
+				<Button.RenderTransform>
+					<CompositeTransform/>
+				</Button.RenderTransform>
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Tap">
+						<ec:GoToStateAction StateName="onTap"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</Button>
+			<Button Content="Najlepsze wyniki" Grid.Row="1" VerticalAlignment="Center"
+				HorizontalAlignment="Center" Click="ScorePage_Click"/>
+			<Button Content="Ustawienia" Grid.Row="2" VerticalAlignment="Center"
+				HorizontalAlignment="Center" Click="SettingsPage_Click"/>
+			<Button Content="Wyjście" Grid.Row="3" VerticalAlignment="Center"
+				HorizontalAlignment="Center" Click="Exit_Click"/>
+		</Grid>
+	</Grid>
 </phone:PhoneApplicationPage>

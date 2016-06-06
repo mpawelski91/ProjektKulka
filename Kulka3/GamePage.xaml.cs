@@ -223,7 +223,6 @@ namespace Kulka3
                     accelerometer.CurrentValueChanged -= Accelerometer_CurrentValueChanged;
                 }
             }
-
         }
 
         private void ScoreConfirmed_Click(object sender, RoutedEventArgs e)
