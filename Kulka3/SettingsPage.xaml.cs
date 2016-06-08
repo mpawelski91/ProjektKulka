@@ -30,9 +30,14 @@ namespace Kulka3
                         .Where(p => p.Name != "Transperant" && p.Name != "Black") 
                         .Select(p => new ColorSelectModel(p.Name, (Color)p.GetValue(typeof(Colors), null)))); 
             listPickerColor.ItemsSource = listPickerColor.ItemsSource ?? new ObservableCollection<ColorSelectModel>(colors);
+            listPickerBallColor.ItemsSource = listPickerColor.ItemsSource ?? new ObservableCollection<ColorSelectModel>(colors);
             this.Background = new SolidColorBrush(Colors.Black);
-               
-        } 
+
+            Helper.BackgroundColor = (listPickerColor.SelectedItem as ColorSelectModel).ColorBrush;
+            Helper.BallColor = (listPickerBallColor.SelectedItem as ColorSelectModel).ColorBrush;
+        }
+
+       
     } 
  
     public class ColorSelectModel 

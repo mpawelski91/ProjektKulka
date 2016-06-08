@@ -4,6 +4,7 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Kulka3
 {
@@ -12,6 +13,9 @@ namespace Kulka3
         public static List<RecordModel> records = new List<RecordModel>();
 
         private static IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+
+        public static SolidColorBrush BackgroundColor;
+        public static SolidColorBrush BallColor = new SolidColorBrush(Colors.Red);
 
         public static void ReadRecords()
         {

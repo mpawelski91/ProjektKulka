@@ -33,6 +33,8 @@ namespace Kulka3
         public GamePage()
         {
             InitializeComponent();
+            Background.Background = Helper.BackgroundColor;
+            Ball.Fill = Helper.BallColor;
 
             accelerometer = new Accelerometer();
             accelerometer.TimeBetweenUpdates = TimeSpan.FromMilliseconds(3);
@@ -128,7 +130,8 @@ namespace Kulka3
             if (holes.Any())
             {
                 foreach(var hole in holes)
-                    if(posY == hole.Y || posX == hole.X)
+                    if((posY >= hole.Y - 40 && posY <= hole.Y + 40) || 
+                        (posX >= hole.X - 40 && posX <= hole.X + 40))
                         return false;
             }
             return true;
@@ -206,8 +209,8 @@ namespace Kulka3
 
         private void CheckHole(Vector2 hole)
         {
-            if ((Canvas.GetLeft(Ball) - 20 >= hole.X - 40 && Canvas.GetLeft(Ball) + 20 <= hole.X + 40) &&
-                Canvas.GetTop(Ball) - 20 >= hole.Y - 40 && Canvas.GetTop(Ball) + 20 <= hole.Y + 40)
+            if ((Canvas.GetLeft(Ball) >= hole.X - 40 && Canvas.GetLeft(Ball) <= hole.X + 40) &&
+                Canvas.GetTop(Ball) >= hole.Y - 40 && Canvas.GetTop(Ball) <= hole.Y + 40)
             {
                 if (hole.X == HolePositionGreen.X && hole.Y == HolePositionGreen.Y)
                 {

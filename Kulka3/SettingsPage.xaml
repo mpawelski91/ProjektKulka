@@ -32,7 +32,7 @@ xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.C
         </Grid>
    
         <Grid Grid.Row ="1">
-            <toolkit:ListPicker Header="Wybierz Kolor" FullModeHeader="Select Color" Name="listPickerColor" VerticalAlignment="Center">
+            <toolkit:ListPicker Header="Wybierz Kolor tła" FullModeHeader="Select Color" Name="listPickerColor" VerticalAlignment="Center">
                 <toolkit:ListPicker.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -51,8 +51,27 @@ xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.C
                 </toolkit:ListPicker.FullModeItemTemplate>
             </toolkit:ListPicker>
         </Grid>
-        
 
+        <Grid Grid.Row ="2">
+            <toolkit:ListPicker Header="Wybierz Kolor piłki" FullModeHeader="Select Color" Name="listPickerBallColor" VerticalAlignment="Center">
+                <toolkit:ListPicker.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="{Binding ColorBrush}" Margin="2, 2, 0 0" Width="26" Height="26" />
+                            <TextBlock Text="{Binding Text}" Margin="4 0 0 0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </toolkit:ListPicker.ItemTemplate>
+                <toolkit:ListPicker.FullModeItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="16 21 0 20">
+                            <Rectangle Fill="{Binding ColorBrush}" Margin="2, 2, 0 0" Width="26" Height="26" />
+                            <TextBlock Text="{Binding Text}" Margin="4 0 0 0" FontSize="43" FontFamily="{StaticResource PhoneFontFamilyLight}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </toolkit:ListPicker.FullModeItemTemplate>
+            </toolkit:ListPicker>
+        </Grid>
 
     </Grid>
 
